@@ -1,7 +1,6 @@
-data/config
+data/config.py
 *.mkv
-*.json
 .vscode/
-__pycache__/
+__pycache__/*
 tmp/*
 plan.txt
