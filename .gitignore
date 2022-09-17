@@ -1,0 +1,7 @@
+data/config
+*.mkv
+*.json
+.vscode/
+__pycache__/
+tmp/*
+plan.txt
