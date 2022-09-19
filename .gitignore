@@ -2,5 +2,7 @@ data/config.py
 *.mkv
 .vscode/
 __pycache__/*
+*.pyc
 tmp/*
-plan.txt
+*.json
+*.txt
