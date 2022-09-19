@@ -1,0 +1,1 @@
+Move your Crunchyroll cookies in this directory.
