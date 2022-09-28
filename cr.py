@@ -52,6 +52,10 @@ with open('meta.json', 'w') as f:
 if meta['episode_info']['season_number'] < 10:
     season = f"S0{meta['episode_info']['season_number']}"
 
+else:
+    season = f"S{meta['episode_info']['season_number']}"
+
+
 if meta['episode_info']['season_number'] == 0:
     season = 'S01'
 
