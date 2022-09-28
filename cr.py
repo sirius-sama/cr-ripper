@@ -20,7 +20,7 @@ config = config.config
 parser = argparse.ArgumentParser(description='This script rips content from crunchyroll')
 
 parser.add_argument('URL', type=str, metavar='URL...', help='URL of the episode')
-parser.add_argument('-res', '--resolution', type=int, metavar='', required=False, nargs='?', default='1080', help='Choose the resolution of the episode', choices=['1080', '720', '480'])
+parser.add_argument('-res', '--resolution', type=str, metavar='', required=False, nargs='?', default='1080', help='Choose the resolution of the episode', choices=['480', '720', '1080'])
 parser.add_argument('-title', '--title', type=str, metavar='', required=False, nargs='?', default='y', help='Use this when you want to use episode name in the main title')
 parser.add_argument('-tag', '--tag', type=str, metavar='', required=False, nargs='?', help='Name of the release group')
 
@@ -73,7 +73,7 @@ else:
 
 
 
-if meta['title'] == 'y':
+if meta['title'] != 'y':
     ep_name = ''
 else:
     ep_name = meta['episode_info']['episode']
@@ -86,4 +86,11 @@ properTitle = properTitle.replace(' ', '.').replace('..','.')
 
 
 # Start download
-# download_cmd = f"yt-dlp {meta['URL']} -f 'best[height={meta['resolution']}]' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
+download_cmd = f"yt-dlp {meta['URL']} -f 'best[height={meta['resolution']}]' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
+
+print('Downloading raw video and subtitles...')
+
+info_json = subprocess.Popen(download_cmd, shell=True, text=True)
+info_json.wait()
+
+print('Download Has been finished.')
