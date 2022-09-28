@@ -98,7 +98,7 @@ print('Download has been finished.')
 
 
 # Muxing
-muxing_cmd = f"!ffmpeg -i '[RAW]{properTitle}.mp4' -i '[RAW]{properTitle}.enUS.ass' -vcodec copy -acodec copy -map 0 -map 1 -metadata:s:a:0 language=jpn -metadata:s:s:0 language=eng -metadata:s:s:0 title=English -disposition:s:0 default -c copy {properTitle}.mkv"
+muxing_cmd = f"ffmpeg -i '[RAW]{properTitle}.mp4' -i '[RAW]{properTitle}.enUS.ass' -vcodec copy -acodec copy -map 0 -map 1 -metadata:s:a:0 language=jpn -metadata:s:s:0 language=eng -metadata:s:s:0 title=English -disposition:s:0 default -c copy {properTitle}.mkv"
 
 muxing = subprocess.Popen(muxing_cmd, shell=True, text=True)
 
