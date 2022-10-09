@@ -83,13 +83,13 @@ else:
 
 
 
-properTitle = f"{meta['episode_info']['series']}.{season}{episode}.{ep_name}.{meta['resolution']}.CR.WEB-DL.AAC2.0.H.264-{tag}"
+properTitle = f"{meta['episode_info']['series']}.{season}{episode}.{ep_name}.{meta['height']}.CR.WEB-DL.AAC2.0.H.264-{tag}"
 properTitle = properTitle.replace(' ', '.').replace('..','.')
 
 
 
 # Start download
-download_cmd = f"yt-dlp {meta['URL']} -f 'best[height={meta['resolution']}]' --write-subs -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
+download_cmd = f"yt-dlp {meta['URL']} -f 'best[height={meta['height']}]' --write-subs -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
 
 print('Downloading raw video and subtitles...')
 
