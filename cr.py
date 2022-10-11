@@ -13,7 +13,7 @@ from pymediainfo import MediaInfo
 # Global variables
 current_directory = os.getcwd()
 output_directory = current_directory
-cookies = os.path('src/cookies/cr-cookies.txt')
+cookies = f"{current_directory}/src/cookies/cr-cookies.txt"
 config = config.config
 
 
