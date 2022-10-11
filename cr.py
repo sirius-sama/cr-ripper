@@ -98,9 +98,9 @@ properTitle = properTitle.replace(' ', '.').replace('..','.')
 
 # Checking crunchyroll version
 if 'beta' in meta['URL']:
-    download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} --cookies '{cookies}' -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
+    download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} --cookies '{cookies}' -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en.*' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
 else:
-    download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
+    download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en.*' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
 
 
 print('Downloading raw video and subtitles...')
