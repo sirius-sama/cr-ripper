@@ -92,7 +92,7 @@ properTitle = properTitle.replace(' ', '.').replace('..','.')
 
 
 # Start download
-download_cmd = f"yt-dlp --external-downloader aria2 {meta['URL']} -f 'best[height={meta['episode_info']['height']}]' --write-subs -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
+download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['episode_info']['height']}]' --write-subs -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
 
 print('Downloading raw video and subtitles...')
 
