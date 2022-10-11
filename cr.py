@@ -32,7 +32,7 @@ meta = vars(args)
 
 # Checking crunchyroll version
 if 'beta' in meta['URL']:
-    info_json_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download --cookies '{cookies}' -o '{current_directory}/episode.%(ext)s'"
+    info_json_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download --cookies 'cr-cookies.txt' -o '{current_directory}/episode.%(ext)s'"
 else:
     info_json_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download -o '{current_directory}/episode.%(ext)s'"
 
@@ -100,7 +100,7 @@ properTitle = properTitle.replace(' ', '.').replace('..','.')
 if 'beta' in meta['URL']:
     download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['episode_info']['height']}]' --write-subs -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
 else:
-    download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['episode_info']['height']}]' --write-subs --cookies '{cookies}' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
+    download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['episode_info']['height']}]' --write-subs --cookies 'cr-cookies.txt' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
 
 
 print('Downloading raw video and subtitles...')
