@@ -60,6 +60,8 @@ if meta['episode_info']['season_number'] == 0:
 
 if meta['episode_info']['episode_number'] < 10:
     episode = f"E0{meta['episode_info']['episode_number']}"
+else:
+    episode = f"{meta['episode_info']['episode_number']}"
 
 
 
