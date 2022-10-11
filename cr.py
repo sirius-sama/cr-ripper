@@ -30,7 +30,7 @@ args = parser.parse_args()
 meta = vars(args)
 
 
-info_json_cmd = f"yt-dlp --external-downloader aria2 {meta['URL']} -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download -o '{current_directory}/episode.%(ext)s'"
+info_json_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download -o '{current_directory}/episode.%(ext)s'"
 
 print('Gathering episode info.json file...')
 
