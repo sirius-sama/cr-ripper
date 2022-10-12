@@ -87,7 +87,7 @@ if meta['title'] != 'y':
     ep_name = ''
 else:
     ep_name = meta['episode_info']['episode']
-    ep_name = ep_name.replace('!','').replace('&','and')
+    ep_name = ep_name.replace('!','').replace('&','and').replace('~','').replace('!!','')
 
 
 
