@@ -1,3 +1,4 @@
+cli-ui
 yt-dlp
 requests
 pymediainfo
