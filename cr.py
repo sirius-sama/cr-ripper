@@ -132,7 +132,7 @@ shutil.move(f"{current_directory}/meta.json", f"{folder_path}/meta.json")
 
 
 # Cleaning up RAW video and subtitle
-raw_files = glob.glob(f'[RAW]{properTitle}*')
+raw_files = glob.glob(f'[RAW]*')
 
 for raw_file in raw_files:
     cli_ui.info(cli_ui.red, "Removing", cli_ui.red, cli_ui.bold, f"{raw_file}")
