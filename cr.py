@@ -56,6 +56,8 @@ with open('meta.json', 'w') as f:
     json.dump(meta, f, indent=4)
 
 
+# Remove info.json file
+os.remove('episode.info.json')
 
 
 # Make proper title
