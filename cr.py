@@ -4,6 +4,8 @@ import os
 import json
 import glob
 import time
+import cli_ui
+import shutil
 import argparse
 import requests
 import subprocess
@@ -31,6 +33,8 @@ args = parser.parse_args()
 
 meta = vars(args)
 
+# Get info.json file of the episode
+
 # Checking crunchyroll version (free of premium)
 if args.pro == True:
     info_json_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} --cookies '{cookies}' -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download --cookies '{cookies}' -o '{current_directory}/episode.%(ext)s'"
@@ -38,7 +42,7 @@ else:
     info_json_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download -o '{current_directory}/episode.%(ext)s'"
 
 
-print('Gathering episode info.json file...')
+cli_ui.info(cli_ui.blue, "Gathering episode info.json file...")
 
 info_json = subprocess.Popen(info_json_cmd, shell=True, text=True)
 info_json.wait()
@@ -91,12 +95,12 @@ else:
     download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en.*' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
 
 
-print('Downloading raw video and subtitles...')
+cli_ui.info(cli_ui.blue, "Downloading raw video and subtitles...")
 
 info_json = subprocess.Popen(download_cmd, shell=True, text=True)
 info_json.wait()
 
-print('Download has been finished.')
+cli_ui.info(cli_ui.green, "Download has been finished.")
 
 
 # Getting subtitle file location
@@ -104,8 +108,6 @@ result = [f for f in glob.glob('*US.ass') if f'{properTitle}']
 
 for f in result:
     subtitle_file = os.path.abspath(f)
-
-print(subtitle_file)
 
 
 # Muxing
@@ -115,4 +117,24 @@ muxing = subprocess.Popen(muxing_cmd, shell=True, text=True)
 
 muxing.wait()
 
-print('Muxing has been finished.')
+cli_ui.info(cli_ui.green, "Muxing has been finished.")
+
+
+# Moving files meta info to tmp folder
+folder_path = f"{current_directory}/tmp/{properTitle}"
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
+
+cli_ui.info(cli_ui.magenta, "Moving meta.json to", cli_ui.bold, f"{folder_path}")
+shutil.move(f"{current_directory}/meta.json", f"{folder_path}/meta.json")
+
+
+# Cleaning up RAW video and subtitle
+raw_files = glob.glob(f'*{properTitle}*')
+
+for raw_file in raw_files:
+    cli_ui.info(cli_ui.red, "Removing", cli_ui.red, cli_ui.bold, f"{raw_file}")
+    os.remove(os.path.abspath(raw_file))
+
+
+cli_ui.info(cli_ui.yellow, cli_ui.bold, "Done :)")
