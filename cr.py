@@ -80,7 +80,7 @@ else:
 
 
 properTitle = f"{meta['episode_info']['series']}.{season}{episode}.{ep_name}.{meta['episode_info']['height']}.CR.WEB-DL.AAC2.0.H.264-{args.tag}"
-properTitle = properTitle.replace(' ', '.').replace('..','.')
+properTitle = properTitle.replace(' ', '.').replace('..','.').replace(':','.')
 
 
 
