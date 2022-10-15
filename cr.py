@@ -79,7 +79,7 @@ else:
 
 if args.title == True:
     ep_name = meta['episode_info']['episode']
-    ep_name = ep_name.replace('&','and').replace('~','').replace(':.',': ')
+    ep_name = ep_name.replace('&','and').replace('~','').replace(':.',': ').replace(',','')
 else:
     ep_name = ''
 
