@@ -1,4 +1,5 @@
 cli-ui
 yt-dlp
 requests
+feedparser
 pymediainfo
