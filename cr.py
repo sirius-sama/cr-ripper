@@ -224,7 +224,7 @@ def downloadAndMux(URL):
     # muxing_cmd = f"ffmpeg -i '[RAW]{properTitle}.mp4' -i '{subtitle_file}' -vcodec copy -acodec copy -map 0 -map 1 -metadata:s:a:0 language=jpn -metadata:s:s:0 language=eng -metadata:s:s:0 title=English -disposition:s:0 default -c copy {properTitle}.mkv"
 
     ## MKVmerge command
-    muxing_cmd = f"""mkvmerge -o {properTitle}.mkv [RAW]{properTitle}.mp4 --language 0:en --track-name 0:'English' {subtitle_file}"""
+    muxing_cmd = f"""mkvmerge -o {properTitle}.mkv [RAW]{properTitle}.mp4 --language 0:en --track-name 0:"English" {subtitle_file}"""
 
     muxing = subprocess.Popen(muxing_cmd, shell=True, text=True)
 
