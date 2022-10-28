@@ -199,7 +199,7 @@ def downloadAndMux(URL):
 
     # Checking crunchyroll version (free of premium)
     if args.pro == True:
-        download_cmd = f"yt-dlp --external-downloader aria2c {URL} --cookies '{cookies}' -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en.*' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
+        download_cmd = f"""yt-dlp --external-downloader aria2c {URL} --cookies '{cookies}' -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en.*' -o "{current_directory}/[RAW]{properTitle}.%(ext)s" """
     else:
         download_cmd = f"yt-dlp --external-downloader aria2c {URL} -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en.*' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
 
