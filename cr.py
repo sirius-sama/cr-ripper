@@ -91,13 +91,26 @@ def searchKeywords():
 
 def downloadAndMux(URL):
 
+    # Check all the available resolutions of the episode
+
+    # Checking crunchyroll version (free of premium)
+    if args.pro == True:
+        checkAvailableResolutions = f"yt-dlp --external-downloader aria2c -F {URL} --cookies '{cookies}' --no-progress"
+    else:
+        checkAvailableResolutions = f"yt-dlp --external-downloader aria2c -F {URL} --no-progress"
+
+    info_json = subprocess.Popen(checkAvailableResolutions, shell=True, text=True)
+    info_json.wait()
+
+
+
     # Get info.json file of the episode
 
     # Checking crunchyroll version (free of premium)
     if args.pro == True:
-        info_json_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} --cookies '{cookies}' -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download --cookies '{cookies}' -o '{current_directory}/episode.%(ext)s'"
+        info_json_cmd = f"yt-dlp --external-downloader aria2c {URL} --cookies '{cookies}' -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download -o '{current_directory}/episode.%(ext)s'"
     else:
-        info_json_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download -o '{current_directory}/episode.%(ext)s'"
+        info_json_cmd = f"yt-dlp --external-downloader aria2c {URL} -f 'best[height={meta['resolution']}]' --no-progress --write-info-json --no-download -o '{current_directory}/episode.%(ext)s'"
 
 
     cli_ui.info(cli_ui.blue, "Gathering episode info.json file...")
@@ -152,9 +165,9 @@ def downloadAndMux(URL):
 
     # Checking crunchyroll version (free of premium)
     if args.pro == True:
-        download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} --cookies '{cookies}' -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en.*' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
+        download_cmd = f"yt-dlp --external-downloader aria2c {URL} --cookies '{cookies}' -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en.*' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
     else:
-        download_cmd = f"yt-dlp --external-downloader aria2c {meta['URL']} -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en.*' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
+        download_cmd = f"yt-dlp --external-downloader aria2c {URL} -f 'best[height={meta['episode_info']['height']}]' --write-subs --sub-langs 'en.*' -o '{current_directory}/[RAW]{properTitle}.%(ext)s'"
 
 
     cli_ui.info(cli_ui.blue, "Downloading raw video and subtitles...")
