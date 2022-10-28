@@ -163,6 +163,9 @@ def downloadAndMux(URL):
 
         elif meta['episode_info']['episode_number'] < 10:
             meta['episode'] = f"E{str(meta['episode_info']['episode_number']).zfill(2)}"
+        
+        elif meta['episode_info']['episode_number'] > 100:
+            meta['episode'] = f"E{meta['episode_info']['episode_number']}"
 
         # else:
         #     episode = f"E{meta['episode_info']['episode_number']}"
