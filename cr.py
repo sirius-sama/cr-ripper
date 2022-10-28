@@ -254,5 +254,4 @@ def downloadAndMux(URL):
 
 
 
-if __name__ == '__main__':
-    searchKeywords()
+searchKeywords()
