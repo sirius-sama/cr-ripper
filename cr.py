@@ -145,7 +145,7 @@ def downloadAndMux(URL):
             meta['season'] = 'S01'
 
         elif meta['episode_info']['season_number'] < 10:
-            meta['season'] = f"S{meta['episode_info']['season_number'].zfill(2)}"
+            meta['season'] = f"S{str(meta['episode_info']['season_number']).zfill(2)}"
 
         # else:
         #     meta['season'] = f"S{meta['episode_info']['season_number']}"
@@ -162,7 +162,7 @@ def downloadAndMux(URL):
             meta['episode'] = "E01"
 
         elif meta['episode_info']['episode_number'] < 10:
-            meta['episode'] = f"E{meta['episode_info']['episode_number'].zfill(2)}"
+            meta['episode'] = f"E{str(meta['episode_info']['episode_number']).zfill(2)}"
 
         # else:
         #     episode = f"E{meta['episode_info']['episode_number']}"
