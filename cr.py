@@ -38,13 +38,7 @@ args = parser.parse_args()
 
 meta = vars(args)
 
-
-
-# https://www.crunchyroll.com/watch/GEVUZM77J/dog--chainsaw
-
-# So there is a changed to the plan. CR new web ui showing episode few mins after they aired. So we gotta fetch the episode link from their feed. So, there would be search() function, which will search user given name in the feed, if found then it'll grab the episode link and convert it to main cr link, then pass that link to download() function. And after finish downloading it'll send files (mp4, sub) to mux() function. So what happens when the user don't want to search and put the direct link of the episode???!!!! 
-
-
+# {'input': 'lol', 'alternative_name': None, 'season': None, 'episode': None, 'no_season': False, 'resolution': '1080', 'title': False, 'pro': False, 'tag': 'Testing'}
 
 def searchKeywords():
     if "crunchyroll" in meta['input'] and ' ' not in meta['input']:
@@ -134,22 +128,51 @@ def downloadAndMux(URL):
     # CONDITION:: If user inputs custom "name", "season", "episode", then use them, if these args value are "None", then use desired info from the episode.info.json/meta.json
 
     # Make proper title
-    if meta['episode_info']['season_number'] < 10:
-        season = f"S0{meta['episode_info']['season_number']}"
+
+    # Alternative name of the series
+
+    if args.alternative_name == None:
+        meta['series'] = meta['episode_info']['series']
     else:
-        season = f"S{meta['episode_info']['season_number']}"
+        meta['series'] = getattr(args, 'alternative_name')
 
 
-    if meta['episode_info']['season_number'] == 0:
-        season = 'S01'
+    # Season number of the series
 
-    if meta['episode_info']['episode_number'] < 10:
-        episode = f"E0{meta['episode_info']['episode_number']}"
+    if args.season == None:
+
+        if meta['episode_info']['season_number'] == 0:
+            meta['season'] = 'S01'
+
+        elif meta['episode_info']['season_number'] < 10:
+            meta['season'] = f"S{meta['episode_info']['season_number'].zfill(2)}"
+
+        # else:
+        #     meta['season'] = f"S{meta['episode_info']['season_number']}"
     else:
-        episode = f"E{meta['episode_info']['episode_number']}"
+        meta['season'] = f"S{getattr(args, 'season').zfill(2)}"
 
 
 
+    # Episode number of the episode
+
+    if args.episode == None:
+
+        if meta['episode_info']['episode_number'] == 0:
+            meta['episode'] = "E01"
+
+        elif meta['episode_info']['episode_number'] < 10:
+            meta['episode'] = f"E{meta['episode_info']['episode_number'].zfill(2)}"
+
+        # else:
+        #     episode = f"E{meta['episode_info']['episode_number']}"
+    else:
+        meta['episode'] = f"E{getattr(args, 'episode').zfill(2)}"
+
+
+
+    # Episode name
+    
     if args.title == True:
         ep_name = meta['episode_info']['episode']
         ep_name = ep_name.replace('&','and').replace('~','').replace(':.',': ').replace(',','')
@@ -157,8 +180,16 @@ def downloadAndMux(URL):
         ep_name = ''
 
 
+    
+    # Empty the value, when there is no need of them
+    if args.no_season == True:
+        meta['season'] = ''
 
-    properTitle = f"{meta['episode_info']['series']}.{season}{episode}.{ep_name}.{meta['episode_info']['height']}.CR.WEB-DL.AAC2.0.H.264-{args.tag}"
+
+
+    # Merge all the info and make a proper title
+
+    properTitle = f"{meta['series']}.{meta['season']}{meta['episode']}.{ep_name}.{meta['episode_info']['height']}.CR.WEB-DL.AAC2.0.H.264-{args.tag}"
     properTitle = properTitle.replace(' ', '.').replace(':','.').replace('..','.')
 
 
