@@ -53,7 +53,7 @@ def searchKeywords():
         cli_ui.info(cli_ui.green, "Searching for", cli_ui.bold, f"{meta['Keywords']}")
 
         for entry in cr_feed.entries:
-            if str(meta['Keywords']) in entry.title and "Dub" not in entry.title:
+            if str(meta['Keywords']).lower() in entry.title.lower() and "dub" not in entry.title.lower():
                 meta['URL'] = entry.link
                 cli_ui.info(cli_ui.blue, "Match found for", cli_ui.bold, f"{meta['Keywords']}")
                 cli_ui.info(cli_ui.blue, "Title:", cli_ui.bold, f"{entry.title}")
