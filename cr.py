@@ -198,7 +198,7 @@ def downloadAndMux(URL):
 
     # Merge all the info and make a proper title
 
-    properTitle = f"{meta['series']}.{meta['season']}{meta['episode']}.{ep_name}.{meta['episode_info']['height']}.CR.WEB-DL.AAC2.0.H.264-{args.tag}"
+    properTitle = f"{meta['series']}.{meta['season']}{meta['episode']}.{ep_name}.{meta['episode_info']['height']}p.CR.WEB-DL.AAC2.0.H.264-{args.tag}"
     properTitle = properTitle.replace(' ', '.').replace(':','.').replace('..','.')
 
 
