@@ -52,10 +52,13 @@ def searchKeywords():
         cr_feed_url = "https://www.crunchyroll.com/rss/anime"
 
         resp = requests.get(cr_feed_url)
-
         content = BytesIO(resp.content)
-
         feed = feedparser.parse(content)
+
+        if "owner" in resp.text.lower() and "banned" in resp.text.lower():
+            cli_ui.info(cli_ui.red, cli_ui.bold, "The owner of this website (www.crunchyroll.com) has banned you temporarily from accessing this website.")
+            exit(1)
+            
 
         cli_ui.info(cli_ui.green, "Searching for", cli_ui.bold, f"{meta['Keywords']}")
 
