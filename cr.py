@@ -10,6 +10,7 @@ import argparse
 import requests
 import feedparser
 import subprocess
+from io import BytesIO
 from data import config
 from pymediainfo import MediaInfo
 
@@ -48,11 +49,17 @@ def searchKeywords():
     else:
         meta['Keywords'] = meta['input']
 
-        cr_feed = feedparser.parse('https://www.crunchyroll.com/rss/anime')
+        cr_feed_url = "https://www.crunchyroll.com/rss/anime"
+
+        resp = requests.get(cr_feed_url)
+
+        content = BytesIO(resp.content)
+
+        feed = feedparser.parse(content)
 
         cli_ui.info(cli_ui.green, "Searching for", cli_ui.bold, f"{meta['Keywords']}")
 
-        for entry in cr_feed.entries:
+        for entry in feed.entries:
             if str(meta['Keywords']).lower() in entry.title.lower() and "dub" not in entry.title.lower():
                 meta['URL'] = entry.link
                 cli_ui.info(cli_ui.blue, "Match found for", cli_ui.bold, f"{meta['Keywords']}")
