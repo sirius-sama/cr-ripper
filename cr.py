@@ -246,11 +246,16 @@ def downloadAndMux(URL):
 
     muxing.wait()
 
-    cli_ui.info(cli_ui.green, "Muxing has been finished.")
-
 
     # Fix audio language tags
-    fix_audio_lang_cmd = f"""mkvprobe "{properTitle}.mkv" --edit track:a1 --set language=jpn"""
+    fix_audio_lang_tag_cmd = f"""mkvpropedit "{properTitle}.mkv" --edit track:a1 --set language=jpn"""
+
+    fix_audio_lang_tag = subprocess.Popen(fix_audio_lang_tag_cmd, shell=True, text=True)
+
+    fix_audio_lang_tag.wait()
+    
+
+    cli_ui.info(cli_ui.green, "Muxing has been finished.")
     
 
 
