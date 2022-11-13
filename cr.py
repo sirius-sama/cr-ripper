@@ -249,6 +249,11 @@ def downloadAndMux(URL):
     cli_ui.info(cli_ui.green, "Muxing has been finished.")
 
 
+    # Fix audio language tags
+    fix_audio_lang_cmd = f"""mkvprobe "{properTitle}.mkv" --edit track:a1 --set language=jpn"""
+    
+
+
     # Moving files meta info to tmp folder
     folder_path = f"{current_directory}/tmp/{properTitle}"
     if not os.path.exists(folder_path):
