@@ -12,9 +12,12 @@ import feedparser
 import subprocess
 from io import BytesIO
 from data import config
+from pathlib import Path
 from pymediainfo import MediaInfo
 
 # Global variables
+HOME = str(Path.home())
+SCRIPT_DIR = f'{HOME}/bin/cr-ripper'
 current_directory = os.getcwd()
 output_directory = current_directory
 cookies = f"{current_directory}/src/cookies/cr-cookies.txt"
