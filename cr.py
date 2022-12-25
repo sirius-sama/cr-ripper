@@ -19,8 +19,7 @@ from pymediainfo import MediaInfo
 HOME = str(Path.home())
 SCRIPT_DIR = f'{HOME}/bin/cr-ripper'
 current_directory = os.getcwd()
-output_directory = current_directory
-cookies = f"{current_directory}/src/cookies/cr-cookies.txt"
+cookies = f"{SCRIPT_DIR}/src/cookies/cr-cookies.txt"
 config = config.config
 
 
